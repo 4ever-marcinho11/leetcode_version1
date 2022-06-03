@@ -18,7 +18,7 @@ public class s322 {
                 if (i - val < 0) {
                     continue;
                 }
-                // 使用动态规划的方式得到最少硬币数
+                // 最少硬币数 or 使用当前币值的硬币后最少硬币数
                 dp[i] = Math.min(dp[i], 1 + dp[i - val]);
             }
         }
