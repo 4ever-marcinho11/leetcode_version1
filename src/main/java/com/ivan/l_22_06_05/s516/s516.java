@@ -5,7 +5,7 @@ public class s516 {
         // dp
         int[][] dp = new int[s.length()][s.length()];
 
-        // base case：对角线为1；规定i<j，因此i>j的情况下为0
+        // base case：对角线i=j为1；i>j的情况下为0
         for (int i = 0; i < s.length(); i++) {
             for (int j = 0; j < s.length(); j++) {
                 if (i == j) {
