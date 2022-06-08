@@ -1,7 +1,7 @@
 package com.ivan.l_22_06_08.s206;
 
 public class s206 {
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList_sbVersion(ListNode head) {
         // 空表直接返回
         if (head == null) {
             return null;
@@ -40,6 +40,21 @@ public class s206 {
         }
 
         return newHead;
+    }
+
+    public ListNode reverseList(ListNode head) {
+        // pre指的是在原链表中pre是cur的前一个节点
+        ListNode pre = null, cur = head;
+        while (cur != null) {
+            // 记录原链表中cur的下一个节点
+            ListNode next = cur.next;
+            // 让cur指向pre
+            cur.next = pre;
+            // 前移两个指针
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 }
 
