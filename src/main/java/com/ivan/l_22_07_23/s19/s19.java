@@ -2,6 +2,7 @@ package com.ivan.l_22_07_23.s19;
 
 public class s19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        // 前面附加一个，保证不会取到目标节点
         ListNode front = new ListNode(-1);
         front.next = head;
         ListNode ptr = front;
@@ -20,6 +21,8 @@ public class s19 {
             ptr = ptr.next;
             range--;
         }
+
+        // 移除目标节点
         ptr.next = ptr.next.next;
 
         return front.next;
