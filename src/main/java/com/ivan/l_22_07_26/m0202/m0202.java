@@ -1,4 +1,4 @@
-package com.ivan.l_22_07_26.m0201.m0202;
+package com.ivan.l_22_07_26.m0202;
 
 public class m0202 {
     public int kthToLast(ListNode head, int k) {
