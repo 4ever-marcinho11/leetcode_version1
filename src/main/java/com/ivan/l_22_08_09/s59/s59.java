@@ -12,28 +12,28 @@ public class s59 {
         int start = 0;
         // 定义填充数字
         int count = 1;
-        int i, j;
+        int x, y;
 
         // 判断边界后，loop从1开始
         while (loop++ < n / 2) {
             // 模拟上侧从左到右
-            for (j = start; j < n - loop; j++) {
-                res[start][j] = count++;
+            for (y = start; y < n - loop; y++) {
+                res[start][y] = count++;
             }
 
             // 模拟右侧从上到下
-            for (i = start; i < n - loop; i++) {
-                res[i][j] = count++;
+            for (x = start; x < n - loop; x++) {
+                res[x][y] = count++;
             }
 
             // 模拟下侧从右到左
-            for (; j >= loop; j--) {
-                res[i][j] = count++;
+            for (; y >= loop; y--) {
+                res[x][y] = count++;
             }
 
             // 模拟左侧从下到上
-            for (; i >= loop; i--) {
-                res[i][j] = count++;
+            for (; x >= loop; x--) {
+                res[x][y] = count++;
             }
             start++;
         }
