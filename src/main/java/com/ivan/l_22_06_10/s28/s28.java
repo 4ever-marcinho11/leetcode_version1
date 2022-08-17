@@ -1,68 +1,70 @@
 package com.ivan.l_22_06_10.s28;
 
-import java.util.Arrays;
-
 public class s28 {
+    /**
+     * 使用不减一的next数组实现kmp算法
+     *
+     * @param haystack 文本串
+     * @param needle   模式串
+     * @return 返回模式串在文本串中出现的第一个位置，如果不存在就返回-1
+     */
     public int strStr(String haystack, String needle) {
-        if (needle == null || needle.length() == 0 || haystack == null) {
+        // 预操作
+        if (needle.length() == 0) {
             return 0;
         }
-        if (needle.length() > haystack.length()) {
-            return -1;
-        }
 
-        // 得到模式串的前缀表
+        // 生成next数组
         int[] next = new int[needle.length()];
-        Arrays.fill(next, 0);
+        generateNextArr(next, needle);
+
+        // kmp
+        return findFirstIdx(next, haystack, needle);
+    }
+
+    private void generateNextArr(int[] next, String needle) {
         for (int i = 1; i < needle.length(); i++) {
-            // 在该字符之前的子串的最长前缀后缀长度
-            int baseLength = next[i - 1];
-             /*
-             为什么用当前字符与needle.charAt(baseLength)这个字符进行比较呢？
-             因为在当前字符前的子串中，最长前缀后缀长度是baseLength，
-             说明前baseLength个字符已经被证明是这个字串的最长前缀后缀长度，只需要跳过这几个字符
-             那需要被当前字符比较的是下标为baseLength的字符（就是上面说的"跳过"）
-             */
-            if (needle.charAt(baseLength) == needle.charAt(i)) {
-                // 相等，直接在原有的最长长度上加1
-                next[i] = baseLength + 1;
+            // 这个时候还没有确定以模式串[i]为结尾的字符串的最长相同前后缀
+            // 因此先获取不包括该字符的字符串的最长相同前后缀长度
+            int j = next[i - 1];
+
+            // str.charAt(x)也可以被想做：跳过str的前x个字符，得到下一个字符
+            if (needle.charAt(j) == needle.charAt(i)) {
+                // 当前元素与跳过后的下一个字符相等，直接在原有的最长长度上加1
+                next[i] = j + 1;
             } else {
-                // 不等，不能直接赋0
-                if (baseLength == 0) {
-                    baseLength = 1;
-                }
-                // 找第baseLength个字符的前一个字符对应的最长长度
-                int len = next[baseLength - 1];
-                // 跳过这个长度，用当前字符与跳过后的第一个字符进行比较
+                /*
+                一个字符只有以下三种情况
+                1. 被前面的最长相等前后缀包括：x+1
+                2. 1
+                3. 0
+                 */
+                // 现在已经排除了上面的第一种情况，那就没必要再看中间夹着的字符了
+                int len = (j == 0) ? next[0] : next[j - 1];
                 if (needle.charAt(len) == needle.charAt(i)) {
-                    // 相等的话在这个长度上加1
+                    // 相等的话，符合第二种情况，在这个长度上加1
                     next[i] = len + 1;
                 }
             }
         }
-        System.out.println("模式串的前缀表是: " + Arrays.toString(next));
-        System.out.println("------------------");
+    }
 
-        // KMP模式匹配，haystack是文本串，needle是模式串
+    private int findFirstIdx(int[] next, String haystack, String needle) {
         int i = 0, j = 0;
         while (j < needle.length() && i < haystack.length()) {
-            System.out.println(haystack + " 的第 " + (i + 1) + " 位是" + haystack.charAt(i));
-            System.out.println(needle + " 的第 " + (j + 1) + " 位是" + needle.charAt(j));
             if (haystack.charAt(i) == needle.charAt(j)) {
-                System.out.println("这两个位置相等，同时前移1位");
+                // 文本串[i]与模式串[j]相等，直接跳过这俩字符
                 i++;
                 j++;
             } else {
-                System.out.print("这两个位置不等，");
                 if (j == 0) {
-                    System.out.println("j为0，i前移1位");
+                    // 与模式串的第一个就不等，模式串没法往前回溯，要让文本串指针后移一位，从后面找
                     i++;
                 } else {
-                    System.out.println("j移动到 " + next[j - 1]);
+                    // 模式串往前回溯
                     j = next[j - 1];
                 }
             }
-            System.out.println("--------------");
         }
 
         if (i == haystack.length() && j < needle.length()) {
