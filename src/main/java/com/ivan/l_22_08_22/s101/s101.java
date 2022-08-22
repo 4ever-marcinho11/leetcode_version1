@@ -37,6 +37,8 @@ public class s101 {
         // 左右值相同的时候需要进行递归，判断下一层
         boolean outer = compare(left.left, right.right);
         boolean inner = compare(left.right, right.left);
+
+        // 注意不能返回 outer == inner，因为都为false的时候不能正确返回结果
         return outer && inner;
     }
 }
