@@ -1,4 +1,4 @@
-package com.ivan.l_22_08_23.s559.s104;
+package com.ivan.l_22_08_23.s104;
 
 
 /**
