@@ -9,7 +9,7 @@ public class s572 {
             return false;
         }
 
-        return isSubtree(root, subRoot) || isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+        return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot) || compare(root, subRoot);
     }
 
     private boolean compare(TreeNode p, TreeNode q) {
