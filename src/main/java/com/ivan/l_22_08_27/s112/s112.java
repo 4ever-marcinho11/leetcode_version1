@@ -16,41 +16,25 @@ public class s112 {
         if (root == null) {
             return false;
         }
-        return traversal(root, targetSum - root.val);
-    }
 
-    public boolean traversal(TreeNode node, int count) {
-        // 叶子节点的情况下，递归的终止条件
-        if (node.left == null && node.right == null && count != 0) {
-            return false;
-        } else if (node.left == null && node.right == null && count == 0) {
-            return true;
+        // 首先更新targetSum
+        targetSum -= root.val;
+
+        // 叶子节点的情况下，递归的终止条件，叶子节点在他的父节点的过程中就被处理过
+        if (root.left == null && root.right == null) {
+            return targetSum == 0;
         }
 
-        if (node.left != null) {
-            // 左子节点存在
-            count -= node.left.val;
-            boolean b = traversal(node.left, count);
+        if (root.left != null) {
+            boolean b = hasPathSum(root.left, targetSum);
             if (b) {
-                // 走这条路找到了一条合理路径
                 return true;
-            } else {
-                // 回溯
-                count += node.left.val;
             }
         }
 
-        if (node.right != null) {
-            // 右子节点存在
-            count -= node.right.val;
-            boolean b = traversal(node.right, count);
-            if (b) {
-                // 走这条路找到了一条合理路径
-                return true;
-            } else {
-                // 回溯
-                count += node.right.val;
-            }
+        if (root.right != null) {
+            boolean b = hasPathSum(root.right, targetSum);
+            return b;
         }
 
         return false;
