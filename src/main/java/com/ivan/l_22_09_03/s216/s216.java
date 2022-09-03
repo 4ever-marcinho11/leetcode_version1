@@ -25,6 +25,14 @@ public class s216 {
         return res;
     }
 
+    /**
+     * backtrack
+     *
+     * @param current current sum
+     * @param target  target sum
+     * @param size    maximum volume
+     * @param start   start from
+     */
     public void bt(int current, int target, int size, int start) {
         if (path.size() == size) {
             if (current == target) {
@@ -34,9 +42,12 @@ public class s216 {
         }
 
         for (int i = start; i <= 9; i++) {
+            // do
             path.add(i);
             current += i;
+            // bt
             bt(current, target, size, i + 1);
+            // cancel
             path.removeLast();
             current -= i;
         }
