@@ -37,6 +37,7 @@ public class s77 {
         }
 
         // 选择 : 选择列表
+        // 可以写成: i <= n, 但是存在剩余数不足以填充path的情况，应该剪枝
         // n - (k - path.size()) + 1表示满足后续添加数字的需求的最小数
         for (int i = startNum; i <= n - (k - path.size()) + 1; i++) {
             // 添加
