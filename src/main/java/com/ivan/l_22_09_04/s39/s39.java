@@ -26,7 +26,8 @@ public class s39 {
             return;
         }
 
-        for (int i = start; i < candidates.length; i++) {
+        // current + candidates[i] <= target是为了剪枝，因为如果大于就不必进入这个分支进行回溯
+        for (int i = start; i < candidates.length && current + candidates[i] <= target; i++) {
             path.add(candidates[i]);
             current += candidates[i];
             bt(i, candidates, target, current);
