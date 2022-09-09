@@ -22,7 +22,9 @@ public class s37 {
 
     public boolean bt(char[][] board) {
         for (int row = 0; row < 9; row++) {
+            // 在一行中
             for (int col = 0; col < 9; col++) {
+                // 在一列中
                 if (board[row][col] == '.') {
                     // 只考虑空白区域
                     for (char c = '1'; c <= '9'; c++) {
@@ -35,7 +37,7 @@ public class s37 {
                             board[row][col] = '.';
                         }
                     }
-                    // 能到这里就代表就九个数字都不能放置
+                    // 一个元素不能存放任意数字，无解
                     return false;
                 }
             }
