@@ -20,11 +20,11 @@ public class s55 {
         }
 
         // 当前位置最大步数
-        int maxCover = 0;
-        for (int i = 0; i <= maxCover; i++) {
+        int crrMax = 0;
+        for (int i = 0; i <= crrMax; i++) {
             // 更新最大步数
-            maxCover = Integer.max(maxCover, i + nums[i]);
-            if (maxCover >= nums.length - 1) {
+            crrMax = Integer.max(crrMax, i + nums[i]);
+            if (crrMax >= nums.length - 1) {
                 return true;
             }
         }
