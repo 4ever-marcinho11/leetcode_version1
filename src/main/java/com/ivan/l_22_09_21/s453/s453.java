@@ -33,6 +33,8 @@ public class s453 {
                 // 上一个区间的右边界小于当前区间的左边界
                 notOverlap++;
                 rightBoundary = intervals[i][1];
+            } else {
+                rightBoundary = Integer.min(rightBoundary, intervals[i][1]);
             }
         }
 
