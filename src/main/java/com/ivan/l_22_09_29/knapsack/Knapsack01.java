@@ -25,18 +25,19 @@ public class Knapsack01 {
             dp[i][0] = 0;
         }
 
-        for (int i = 1; i <= numOfGoods; i++) {
-            for (int s = 1; s <= bagSize; s++) {
-                if (s < weights[i - 1]) {
+        for (int iTh = 1; iTh <= numOfGoods; iTh++) {
+            for (int constrain = 1; constrain <= bagSize; constrain++) {
+                // 减一是为了获得索引
+                if (constrain < weights[iTh - 1]) {
                     // 要放的物品超重
-                    dp[i][s] = dp[i - 1][s];
+                    dp[iTh][constrain] = dp[iTh - 1][constrain];
                 } else {
                     // 放或不放
                     // 放了
-                    int yes = dp[i - 1][s - weights[i - 1]] + values[i - 1];
-                    int no = dp[i - 1][s];
+                    int yes = dp[iTh - 1][constrain - weights[iTh - 1]] + values[iTh - 1];
                     // 不放
-                    dp[i][s] = Integer.max(yes, no);
+                    int no = dp[iTh - 1][constrain];
+                    dp[iTh][constrain] = Integer.max(yes, no);
                 }
             }
         }
