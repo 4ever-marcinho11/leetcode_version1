@@ -23,33 +23,31 @@ public class s416 {
             return false;
         }
 
-        int maxWeight = sumWeight / 2;
+        int bagsize = sumWeight / 2;
         int numOfGoods = nums.length;
         // i: 可以放到第i个元素, j: 限重为j
-        int[][] dp = new int[numOfGoods][maxWeight + 1];
+        int[][] dp = new int[numOfGoods][bagsize + 1];
 
         // 初始化dp数组
-        for (int i = nums[0]; i <= maxWeight; i++) {
+        for (int i = nums[0]; i <= bagsize; i++) {
             dp[0][i] = nums[0];
         }
 
-        for (int iTh = 1; iTh < numOfGoods; iTh++) {
-            for (int currMax = 1; currMax <= maxWeight; currMax++) {
-                int weightOfI = nums[iTh - 1];
-                int valueOfI = nums[iTh - 1];
-                if (currMax < weightOfI) {
+        for (int i = 1; i < numOfGoods; i++) {
+            for (int j = 1; j <= bagsize; j++) {
+                if (j < nums[i - 1]) {
                     // 重量不够放
-                    dp[iTh][currMax] = dp[iTh - 1][currMax];
+                    dp[i][j] = dp[i - 1][j];
                 } else {
                     // 放
-                    int yes = dp[iTh - 1][currMax - weightOfI] + valueOfI;
+                    int yes = dp[i - 1][j - nums[i - 1]] + nums[i - 1];
                     // 不放
-                    int no = dp[iTh - 1][currMax];
-                    dp[iTh][currMax] = Integer.max(yes, no);
+                    int no = dp[i - 1][j];
+                    dp[i][j] = Integer.max(yes, no);
                 }
             }
         }
 
-        return dp[numOfGoods - 1][maxWeight] == maxWeight;
+        return dp[numOfGoods - 1][bagsize] == bagsize;
     }
 }
