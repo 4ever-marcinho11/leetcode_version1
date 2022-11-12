@@ -1,4 +1,4 @@
-package com.ivan.l_22_11_09.s416;
+package com.ivan.l_22_11_08.knapsack01.l_22_11_09.s416;
 
 import java.util.Arrays;
 

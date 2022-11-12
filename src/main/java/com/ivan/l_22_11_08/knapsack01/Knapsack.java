@@ -8,8 +8,8 @@ public class Knapsack {
         int[] weight = {1, 3, 4};
         int[] value = {15, 20, 30};
         int bagsize = 4;
-        knapsack01(weight, value, bagsize);
-        knapsack01_2(weight, value, bagsize);
+        use2d(weight, value, bagsize);
+        use1d(weight, value, bagsize);
     }
 
     /**
@@ -19,7 +19,7 @@ public class Knapsack {
      * @param value   价值
      * @param bagsize 限重
      */
-    public static void knapsack01(int[] weight, int[] value, int bagsize) {
+    public static void use2d(int[] weight, int[] value, int bagsize) {
         // dp[i][j]表示容量为j的背包中放0-i下标对应的任意一个物品
         int[][] dp = new int[weight.length][bagsize + 1];
 
@@ -27,7 +27,7 @@ public class Knapsack {
         for (int i = 0; i < weight.length; i++) {
             dp[i][0] = 0;
         }
-        for (int i = value[0]; i <= bagsize; i++) {
+        for (int i = weight[0]; i <= bagsize; i++) {
             dp[0][i] = value[0];
         }
 
@@ -61,7 +61,7 @@ public class Knapsack {
      * @param value   价值
      * @param bagsize 限重
      */
-    public static void knapsack01_2(int[] weight, int[] value, int bagsize) {
+    public static void use1d(int[] weight, int[] value, int bagsize) {
         /*
         原递推表达式: dp[i][j] = max( dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i] )
         现递推表达式: dp[j] = max( dp[j], dp[j - weight[i]] + value[i] )
@@ -71,12 +71,12 @@ public class Knapsack {
         int[] dp = new int[bagsize + 1];
 
         // 初始化
-        for (int i = value[0]; i <= bagsize; i++) {
+        for (int i = weight[0]; i <= bagsize; i++) {
             dp[i] = value[0];
         }
 
         // 遍历物品
-        for (int i = 1; i < weight.length; i++) {
+        for (int i = 0; i < weight.length; i++) {
             for (int j = bagsize; j >= weight[i]; j--) {
                 dp[j] = Integer.max(dp[j], dp[j - weight[i]] + value[i]);
             }
