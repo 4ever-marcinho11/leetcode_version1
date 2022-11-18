@@ -8,6 +8,8 @@ public class s121 {
      * @return 返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。
      */
     public int maxProfit(int[] prices) {
+        // 一只股票只能有一次购买卖出操作
+
         if (prices.length == 0) {
             return 0;
         }
