@@ -4,7 +4,7 @@ public class s718 {
     /**
      * @param nums1 整数数组
      * @param nums2 整数数组
-     * @return 两个数组中 公共的 、长度最长的子数组的长度
+     * @return 两个数组中 公共的 、长度最长的子数组（连续）的长度
      */
     public int findLength(int[] nums1, int[] nums2) {
         // dp[i][j]表示以nums1[i-1]、nums[j-1]为结尾的两个数组的最长重复子数组长度
