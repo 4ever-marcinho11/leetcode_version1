@@ -12,9 +12,9 @@ public class s392 {
      * 如果有大量输入的 S，称作 S1, S2, ... , Sk 其中 k >= 10亿，你需要依次检查它们是否为 T 的子序列。
      * 在这种情况下，你会怎样改变代码？
      *
-     * @param s
-     * @param t
-     * @return
+     * @param s 字符串
+     * @param t 字符串
+     * @return 判断 s 是否为 t 的子序列
      */
     public boolean isSubsequence(String s, String t) {
         int[][] dp = new int[s.length() + 1][t.length() + 1];
@@ -29,8 +29,6 @@ public class s392 {
                 }
             }
         }
-
-        System.out.println(dp[s.length()][t.length()]);
 
         return s.length() == dp[s.length()][t.length()];
     }
